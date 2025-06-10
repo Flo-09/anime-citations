@@ -1,1 +1,538 @@
+<style>
+  :root {
+    --bg: #000;
+    --text: #fff;
+    --subtext: #aaa;
+    --card: #111;
+    --border: #333;
+    --btn: #222;
+    --btn-hover: #444;
+    --copier: #aaa;
+    --copier-hover: #fff;
+  }
+
+  body.light {
+    --bg: #fff;
+    --text: #000;
+    --subtext: #555;
+    --card: #f1f1f1;
+    --border: #ccc;
+    --btn: #ddd;
+    --btn-hover: #bbb;
+    --copier: #333;
+    --copier-hover: #000;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 2rem;
+    transition: background 0.3s ease, color 0.3s ease;
+    background-image: radial-gradient(circle at top left, #111 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p.subtitle {
+    text-align: center;
+    color: var(--subtext);
+    margin-bottom: 2rem;
+  }
+
+  .theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--btn);
+    border: none;
+    color: var(--text);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .theme-toggle:hover {
+    background: var(--btn-hover);
+  }
+
+  .filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .filter-btn {
+    background-color: var(--btn);
+    border: none;
+    color: var(--text);
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background-color: var(--btn-hover);
+    font-weight: bold;
+  }
+
+  .random-btn {
+    display: block;
+    margin: 0 auto 2rem;
+    background-color: var(--btn);
+    border: none;
+    color: var(--text);
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .random-btn:hover {
+    background-color: var(--btn-hover);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s, filter 0.3s;
+    animation: fadeIn 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  
+.card {
+  transition: transform 0.3s ease, filter 0.3s ease;
+  
+}
+
+.card:hover {
+  transform: scale(1.03);
+  filter: brightness(1.08);
+}
+
+.card:hover .anime-badge {
+  color: #fff;
+  transform: scale(1.05);
+  background-color: var(--btn-hover);
+  transition: all 0.3s ease;
+}
+.anime-badge {
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+  .anime-badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background: var(--btn);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+    color: var(--text);
+    border-radius: 8px;
+    opacity: 0.85;
+    transition: color 0.3s ease;
+  }
+
+  .card:hover .anime-badge {
+    color: #fff;
+  }
+  h1 {
+  transition: color 0.4s ease;
+}
+h1:hover {
+  color: var(--copier-hover); /* passe en blanc vif */
+}
+
+
+  .image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .citation {
+    padding: 1rem;
+  }
+
+  .texte {
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+
+  .auteur {
+    margin-top: 0.5rem;
+    text-align: right;
+    color: var(--subtext);
+  }
+
+  .copier-btn {
+    margin-top: 0.5rem;
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--copier);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .copier-btn:hover {
+    color: var(--copier-hover);
+  }
+
+  #scrollTop {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: none;
+    background: var(--btn);
+    border: none;
+    color: var(--text);
+    padding: 0.5rem 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  #scrollTop:hover {
+    background: var(--btn-hover);
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 4rem;
+    font-size: 0.9rem;
+    color: var(--subtext);
+  }
+
+  body.naruto #background-overlay {
+    background: radial-gradient(circle, #f3c969, #f08a24, #2e1b0f);
+  }
+
+  body.rezero #background-overlay {
+    background: radial-gradient(circle, #dcefff, #7fb0da, #324c66);
+  }
+
+  body.cote #background-overlay {
+    background: radial-gradient(circle, #d9d9d9, #7e7e7e, #1a1a1a);
+  }
+
+  body.jjk #background-overlay {
+    background: radial-gradient(circle, #e3ccff, #9453ff, #2e005b);
+  }
+
+  body.aot #background-overlay {
+    background: radial-gradient(circle, #d2e2cc, #758c76, #1c2e1e);
+  }
+
+  h1, p, .texte, .auteur, .subtitle, .anime-badge {
+    cursor: default;
+  }
+  .search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  color: var(--text);
+  width: 60%;
+  max-width: 500px;
+  font-size: 1rem;
+  transition: border 0.3s, background 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--btn-hover);
+  background-color: var(--btn);
+}
+
+</style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme(this)" aria-label="Changer le thème">☀️</button>
+  <h1>« Comprendre le monde, c’est d’abord se comprendre soi. »</h1>
+  <p class="subtitle">Un espace d’introspection animé — Neydra</p>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filtrer(this, 'tous')">Tous</button>
+    <button class="filter-btn" onclick="filtrer(this, 'Naruto')">Naruto</button>
+    <button class="filter-btn" onclick="filtrer(this, 'SNK')"> Shingeki no Kyojin</button>
+    <button class="filter-btn" onclick="filtrer(this, 'JJK')">Jujutsu Kaisen</button>
+    <button class="filter-btn" onclick="filtrer(this, 'ReZero')">Re:Zero</button>
+    <button class="filter-btn" onclick="filtrer(this, 'Classroom of the Elite')">Classroom of the Elite</button>
+	<button class="filter-btn" onclick="filtrer(this, 'One Piece')">One Piece</button>
+	<button class="filter-btn" onclick="filtrer(this, 'MHA')">My Hero Academia</button>
+	<button class="filter-btn" onclick="filtrer(this, 'Assassination Classroom')">Assassination Classroom</button>
+    <button class="filter-btn" onclick="filtrer(this, 'The Seven Deadly Sins')">The Seven Deadly Sins </button>
+	<button class="filter-btn" onclick="filtrer(this, 'Parasyte')">Parasyte </button>
+	<button class="filter-btn" onclick="filtrer(this, 'Tokyo Ghoul')">Tokyo Ghoul </button>
+
+  </div>
+
+<div class="search-bar">
+  <input type="text" class="search-input" id="searchInput" placeholder="🔍 Rechercher une citation ou un personnage..." oninput="rechercherCitation()">
+</div>
+
+<button class="random-btn" onclick="afficherCitationAleatoire()">🎲 Citation aléatoire</button>
+
+
+
+  <main class="grid" id="citations"></main>
+  <button id="scrollTop" onclick="scrollToTop()" aria-label="Retour en haut">⬆️</button>
+  <footer>© Neydra. Tous droits réservés.</footer>
+
+ <script>
+    const citations = [
+    
+      { anime: 'Classroom of the Elite', texte: "«  Les émotions sont inutiles. Ce sont des parasites qui troublent la logique.  »", auteur: "Ayanokoji", image: "https://i.pinimg.com/736x/d8/ec/97/d8ec978537d140e5e6167c900be9b459.jpg" },
+      { anime: 'Classroom of the Elite', texte: "« Ceux qui parlent d’égalité sont généralement les perdants. »", auteur: "Ayanokoji", image: "https://i.pinimg.com/736x/60/01/8c/60018ce13a38e6715f7ae873837bb05b.jpg" },
+      { anime: 'Classroom of the Elite', texte: "« Les émotions peuvent facilement interférer avec une prise de décision logique.  »", auteur: "Ayanokoji", image: "https://i.pinimg.com/736x/15/1a/d5/151ad55351bfe89a1668b6f9d8f4f340.jpg" },
+      { anime: 'Classroom of the Elite', texte: "« Pour atteindre une conclusion rationnelle, il faut d’abord éliminer toutes les émotions. »", auteur: "Ayanokoji", image: "https://i.pinimg.com/736x/b0/c9/bf/b0c9bfa148376e0182997cd13273289e.jpg" },
+      { anime: 'Classroom of the Elite', texte: "« Dans ce monde, dévoiler ses pensées est une faiblesse. Il faut les garder enfouies pour avancer.  »", auteur: "Ayanokoji", image: "https://i.pinimg.com/736x/77/dd/f5/77ddf5d59d1d8e28c62fdc7597fa86d8.jpg" },
+      { anime: 'Classroom of the Elite', texte: "« Peu importe qui est le cerveau… Je vais le traquer et l’écraser. »", auteur: "Ryuen ", image: "https://i.pinimg.com/736x/b3/89/3b/b3893b1a0d31446f9af2a1f53e81a0e3.jpg" },
+      { anime: 'Classroom of the Elite', texte: "« Je n’ai besoin de me comparer à personne. Je suis déjà au sommet.. »", auteur: "Koenji", image: "https://i.pinimg.com/736x/52/74/c6/5274c68199f50603d6952a44104cbf89.jpg" },
+      { anime: 'Classroom of the Elite', texte: "« Les pions qui se croient rois sont les plus amusants à faire tomber. »", auteur: "Ichika", image: "https://i.pinimg.com/736x/b7/1a/0b/b71a0b6583746e913d150c47abc99ef6.jpg" },
+
+      { anime: 'Naruto', texte: "« Ceux qui ne respectent pas les règles sont des moins que rien… mais ceux qui abandonnent leurs amis sont encore pires. »", auteur: "Kakashi", image: "https://i.pinimg.com/736x/28/14/d3/2814d3f4b243a87d2150363729f3d732.jpg" },
+      { anime: 'Naruto', texte: "« Je ne reviendrai jamais sur ma parole… c’est ça, mon nindô ! »", auteur: "Naruto", image: "https://i.pinimg.com/736x/24/96/10/249610c1843051660c0c53af03eb2995.jpg" },
+      { anime: 'Naruto', texte: "« La véritable paix ne pourra exister que lorsque tout le monde aura connu la douleur. »", auteur: "Nagato", image: "https://i.pinimg.com/736x/47/8b/f8/478bf8d14dc9acd4193e4163d37d25c4.jpg" },
+      { anime: 'Naruto', texte: "« Tant que la haine existe, on ne pourra jamais vraiment se comprendre. »", auteur: "Itachi", image: "https://i.pinimg.com/736x/f2/cc/36/f2cc36f0dc22f0d2156e2f8a40360ec3.jpg" },
+      { anime: 'Naruto', texte: "« Tu es fort, car tu sais reconnaître ta douleur. Ceux qui fuient leur souffrance ne peuvent pas grandir.»", auteur: "Itachi", image: "https://i.pinimg.com/736x/9a/0f/30/9a0f30cb4e6fce96b6b738599536c9b8.jpg" },
+	  { anime: 'Naruto', texte: "« Ce qui compte pour un shinobi, ce n’est pas comment il vit… mais ce pour quoi il meurt.  »", auteur: "Minato", image: "https://i.pinimg.com/736x/14/5d/69/145d6986dcf56bcb313b636aeb3fc7e6.jpg" },
+	  { anime: 'Naruto', texte: "« Ce monde est régi par la survie du plus fort. Ceux qui ne peuvent pas suivre le rythme sont balayés. »", auteur: "Madara", image: "https://i.pinimg.com/736x/c4/f3/4a/c4f34a623418ef27a173ebe665b87f5d.jpg" },
+	  { anime: 'Naruto', texte: " « Un véritable perdant est celui qui abandonne ! Tant que je continue à me battre, je ne perdrai jamais ! »", auteur: "Rock Lee", image: "https://i.pinimg.com/736x/81/fc/09/81fc094e46de0b8c9bf2132b7c783c73.jpg" },
+
+ 
+      { anime: 'SNK', texte: "« Ce monde est cruel… mais il est aussi très beau.  »", auteur: "Mikasa", image: "https://i.pinimg.com/736x/e0/57/29/e057292f506e47c285e8b5d1a0c8c171.jpg" },
+      { anime: 'SNK', texte: "« Si tu veux vivre, alors bats-toi. »", auteur: "Eren", image: "https://i.pinimg.com/736x/ba/5f/8a/ba5f8a3eeb37935c7b74300afcb15317.jpg" },
+      { anime: 'SNK', texte: "« Offrez vos cœurs ! Donnez vos vies pour l’avenir de l’humanité !  »", auteur: "Erwin", image: "https://i.pinimg.com/736x/82/9e/e9/829ee956deb1e0217207f647841effe0.jpg" },
+      { anime: 'SNK', texte: "« Peu importe combien d’ennemis il y a… je les tuerai tous.  »", auteur: "Levi", image: "https://i.pinimg.com/736x/40/e4/f2/40e4f222740a74b3a284a900e3fdeead.jpg" },
+      { anime: 'SNK', texte: "« Si je ne me bats pas, je ne peux rien protéger. »", auteur: "Eren", image: "https://i.pinimg.com/736x/e2/b4/2b/e2b42b6fdeecf62bf45792880428bdff.jpg" },
+      { anime: 'SNK', texte: "« Eren… tant que tu es libre… tout va bien. »", auteur: "Mikasa", image: "https://i.pinimg.com/736x/7d/bf/b7/7dbfb7a34055389b0b1e34444656d789.jpg" },
+      { anime: 'SNK', texte: "« La vérité, c’est qu’on ne saura jamais si c’était la bonne décision… tant qu’on ne l’a pas prise. »", auteur: "Erwin", image: "https://i.pinimg.com/736x/1f/f9/10/1ff910b5188915f38a4a6b0326b60e39.jpg" },
+      { anime: 'SNK', texte: "« Personne ne peut prédire l’issue d’un choix. Alors fais ce que tu crois être juste.  »", auteur: "Levi", image: "https://i.pinimg.com/736x/cc/a3/c3/cca3c3c9db22a0807e366539c6f05719.jpg" },
+
+	  { anime: 'JJK', texte: "« Je veux sauver les gens que je considère comme bons. Peu importe si ça semble égoïste. »", auteur: "Megumi", image: "https://i.pinimg.com/736x/6e/76/fe/6e76fe76a3e3f3bdacb79885cf80e068.jpg" },
+      { anime: 'JJK', texte: "« Je sais que je suis faible… mais c’est justement pour ça que je ne peux pas reculer.  »", auteur: "Yuji", image: "https://i.pinimg.com/736x/26/4c/c2/264cc2057b0d8a7222184ab5c7e9de85.jpg" },
+      { anime: 'JJK', texte: "« Mourir sans but… c’est le vrai gâchis.  »", auteur: "Gojo", image: "https://i.pinimg.com/736x/b1/6a/0f/b16a0f9e4d6f54edadd63f512f6d61a8.jpg" },
+      { anime: 'JJK', texte: "« Le travail, c’est de la merde. Mais tant qu’on est en vie, il faut le faire.  »", auteur: "Nanami", image: "https://i.pinimg.com/736x/09/fc/86/09fc861cefd7ca660db1aaea4452d215.jpg" },
+      { anime: 'JJK', texte: "« Les forts gagnent. Les faibles meurent. C’est tout.  »", auteur: "Toji", image: "https://i.pinimg.com/736x/0e/be/d8/0ebed899927920711239c2ccde4178eb.jpg" },
+      { anime: 'JJK', texte: "« Tu penses être un héros ? Tu n’es qu’un insecte pathétique qui implore pour sa vie. »", auteur: "Sukuna", image: "https://i.pinimg.com/736x/5e/2a/d1/5e2ad148d1c22ab99af5940b21f3d5a9.jpg" },
+      { anime: 'JJK', texte: "« Si les puissants ne protègent pas les faibles… qui le fera ?  »", auteur: "Gojo", image: "https://i.pinimg.com/736x/b9/66/8b/b9668b8233a769967e4ba7cdf0e0d3bf.jpg" },
+      { anime: 'JJK', texte: "« Peu importe si c’est égoïste… je veux sauver les gens.  »", auteur: "Yuji", image: "https://i.pinimg.com/736x/c0/6d/c1/c06dc1204971428658ab5911ee0954d0.jpg" },
+
+      { anime: 'ReZero', texte: "« Même si je dois mourir encore et encore, je me relèverai… autant de fois qu’il le faudra.  »", auteur: "Subaru", image: "https://i.pinimg.com/736x/76/c1/0c/76c10cd9b1a21a1849a17a0f233c1261.jpg" },
+      { anime: 'ReZero', texte: "« Je suis pathétique. J’ai échoué encore et encore. Mais même comme ça… je veux continuer à avancer. »", auteur: "Subaru", image: "https://i.pinimg.com/736x/3a/09/59/3a09594cbf94dad130ab99bc096db90c.jpg" },
+      { anime: 'ReZero', texte: "« Je porterai ma douleur avec moi. Parce que c’est ce qui me permet d’avancer.  »", auteur: "Subaru", image: "https://i.pinimg.com/736x/85/31/2c/85312cdc6e2f891295011ea3fb642072.jpg" },
+      { anime: 'ReZero', texte: "« Tu es mon héros. »", auteur: "Rem", image: "https://i.pinimg.com/736x/a2/54/a5/a254a5ef60f6f146da6c0a67961da943.jpg" },
+      { anime: 'ReZero', texte: "« Même si tu dis que tu me détestes… je continuerai à t’aimer. C’est le choix que j’ai fait. »", auteur: "Rem", image: "https://i.pinimg.com/736x/4c/65/d9/4c65d9a301aef251a7db7f33e7494a8a.jpg" },
+      { anime: 'ReZero', texte: "« Je ne veux plus fuir. Je veux croire que je peux être quelqu’un de bien, même si je suis brisée. »", auteur: "Emilia", image: "https://i.pinimg.com/736x/eb/52/04/eb5204ebc09a87939c2187cc7dcbed2a.jpg" },
+      { anime: 'ReZero', texte: "« Peu importe combien tu souffres ou combien tu échoues. Si tu veux atteindre ton but, tu devras continuer malgré tout.»", auteur: "Roswaal", image: "https://i.pinimg.com/736x/bd/b3/75/bdb375d625c61d99849271b8126ba9da.jpg" },
+      { anime: 'ReZero', texte: "« Ce monde est rempli de choses que l’on ne peut comprendre qu’en les expérimentant… même si ça doit passer par la mort. »", auteur: "Echidna", image: "https://i.pinimg.com/736x/ca/73/c7/ca73c79317ab148a0d93267c01f5f3b7.jpg" },
+      
+	  { anime: 'One Piece', texte: "« Seuls les vainqueurs ont le droit de définir ce qui est juste. Les perdants n’ont pas leur mot à dire.  »", auteur : "Doflamingo", image: "https://i.pinimg.com/736x/92/36/20/923620462bdbf8d001f967e6dcc6d73f.jpg" },
+	  { anime: 'One Piece', texte: "« Rien... rien ne s’est passé. »", auteur : "Zoro", image: "https://i.pinimg.com/736x/dd/7f/f7/dd7ff7d07ea3c49850d5163ff33814c5.jpg" },
+	  { anime: 'One Piece', texte: "« Moi aussi, je veux vivre ! »", auteur : "Robin", image: "https://i.pinimg.com/736x/f7/f0/c3/f7f0c3a27feca210f8b53edc33936ad8.jpg" },
+	  { anime: 'One Piece', texte: "«  Peu importe qui tu es… je ne fuirai jamais ! »", auteur : "Luffy", image: "https://i.pinimg.com/736x/40/31/00/403100c729d0ef4551aeadfa57d9cbf7.jpg" },
+	  { anime: 'One Piece', texte: "« Merci pour tout… pour m’avoir aimé.  »", auteur : "Ace", image: "https://i.pinimg.com/736x/a4/66/f2/a466f2d132a023851f680540935851ea.jpg" },
+	  { anime: 'One Piece', texte: "« LE ONE PIECE… EXISTE !!!»", auteur : "Barbe Blanche", image: "https://i.pinimg.com/736x/02/a5/4d/02a54d4e04bf48ecfaf708aff1bc909f.jpg" },
+	  { anime: 'One Piece', texte: "« Les faibles n’ont pas leur place dans ce monde. »", auteur : "Kaido", image: "https://i.pinimg.com/736x/fe/bc/60/febc6074119bea04f513894ba7e3a4e9.jpg" },
+	  { anime: 'One Piece', texte: "« Dans ce monde, il n’y a pas de justice. Les gagnants écrivent l’histoire… les perdants n’ont pas leur mot à dire. »", auteur : "Doflamingo", image: "https://i.pinimg.com/736x/9d/eb/22/9deb22a6df773a4e76a5e9aaea7bc5fd.jpg" },
+	 
+	  { anime: 'MHA', texte: "« Tu peux devenir un héros. »", auteur : "All Might", image: "https://i.pinimg.com/736x/9f/5e/82/9f5e8287f9a8d289fdd6b23007d77a2c.jpg" },
+	  { anime: 'MHA', texte: "« Même si je n’ai pas de pouvoir, je ferai de mon mieux… jusqu’à ce que mon corps me lâche ! Je veux devenir un héros comme toi ! »", auteur : " Izuku ", image: "https://i.pinimg.com/736x/38/d0/7d/38d07d63c84820920ba7f748c6696e8d.jpg" },
+	  { anime: 'MHA', texte: "« Je ne suis pas lui… Je suis moi ! »", auteur : " Shoto ", image: "https://i.pinimg.com/736x/2c/f5/a7/2cf5a748919fa41c3efc3dbdcbd05a3e.jpg" },
+	  { anime: 'MHA', texte: "« Les faibles n’ont pas le luxe de choisir comment ils meurent.  »", auteur : " Bakugo ", image: "https://i.pinimg.com/736x/6f/c3/6b/6fc36bc207180b3e5c2025e893336d2c.jpg" },
+	  { anime: 'MHA', texte: "« Un héros, c’est quelqu’un qui trouve une solution, peu importe les circonstances.  »", auteur : " Aizawa ", image: "https://i.pinimg.com/736x/35/fa/6e/35fa6e3700569305482d30a76e16f13e.jpg" },
+	  { anime: 'MHA', texte: "«  Le seul qui ait le droit d’être appelé un vrai héros… c’est All Might !»", auteur : " Stain  ", image: "https://i.pinimg.com/736x/9c/9f/b2/9c9fb2ec1ef73fbd50365a0414df95d6.jpg" },
+	  { anime: 'MHA', texte: "« Tant qu’il y aura des héros… il y aura des vilains créés par leur simple existence.  »", auteur : " All For One  ", image: "https://i.pinimg.com/736x/59/5f/43/595f431b77b00c0c780df8e00e8dd775.jpg" },
+	  { anime: 'MHA', texte: "« Même sans mon alter… je vais continuer à me battre ! Parce que je suis encore Lemillion ! »", auteur : " Mirio ", image: "https://i.pinimg.com/736x/de/f1/6b/def16b7d37bba358fd4219c92d840919.jpg" },
+	  
+	  { anime: 'Assassination Classroom', texte: "« Ce n’est qu’en connaissant l’échec qu’on peut apprendre à réussir.  »", auteur : " Koro-sensei ", image: "https://i.pinimg.com/736x/02/e5/55/02e55548c6f0c9f80eeeeda58ed19be1.jpg" },
+	  { anime: 'Assassination Classroom', texte: "«  Faire des erreurs, c’est la preuve que vous avancez.  »", auteur : " Koro-sensei ", image: "https://i.pinimg.com/736x/08/d1/cd/08d1cde8848f5873472e89cb612b5f52.jpg" },
+	  { anime: 'Assassination Classroom', texte: "«  Les assassins n’ont pas besoin d’être forts. Il leur faut seulement du sang-froid. »", auteur : "  Nagisa ", image: "https://i.pinimg.com/736x/ef/63/02/ef6302e0da2701960568d19516b44ed1.jpg" },
+	  { anime: 'Assassination Classroom', texte: "« Ceux qui ne comprennent pas la douleur des autres n’ont pas le droit de donner des ordres.  »", auteur : "   Karma ", image: "https://i.pinimg.com/736x/9b/0b/77/9b0b77cdb78a6fbba081ad4825a86e1f.jpg" },
+	  { anime: 'Assassination Classroom', texte: "« Un professeur qui n’aime pas ses élèves n’a rien à faire dans une salle de classe. »", auteur : "   Koro-sensei ", image: "https://i.pinimg.com/736x/f7/35/bd/f735bd85052d8586ec44390321198a9a.jpg" },
+	  { anime: 'Assassination Classroom', texte: "« Si tu veux protéger quelqu’un, tu dois être plus fort que tout ce qui te menace. »", auteur : " Karasuma ", image: "https://i.pinimg.com/736x/95/c4/4c/95c44c7a2bfa20b06f3ac6d785811ecd.jpg" },
+	  { anime: 'Assassination Classroom', texte: "« J’ai peut-être commencé par jouer un rôle, mais je me suis attachée à vous, pour de vrai »", auteur : " Irina  ", image: "https://i.pinimg.com/736x/9e/c7/95/9ec7957b34260476285b8eef715ba9e9.jpg" },
+	  { anime: 'Assassination Classroom', texte: "« Mon rôle était de vous enseigner… pour que vous puissiez défendre votre avenir de vos propres mains. »", auteur : " Koro-sensei  ", image: "https://i.pinimg.com/736x/e5/d8/4c/e5d84c1ff221efb81e86704852f31ae8.jpg" },
+	
+      { anime: 'The Seven Deadly Sins', texte: "« Je t’ai toujours aimée… et cette fois, je ne laisserai rien nous séparer. »", auteur : "  Meliodas  ", image: "https://i.pinimg.com/736x/96/27/db/9627db761bc5d7bb6dae411885a8a215.jpg" },
+	  { anime: 'The Seven Deadly Sins', texte: "« Qui d’autre que moi… oserait me regarder de haut ? »", auteur : "  Escanor  ", image: "https://i.pinimg.com/736x/0e/f8/c6/0ef8c63a5bb4127ac3c6ebe7316d14b0.jpg" },
+	  { anime: 'The Seven Deadly Sins', texte: "« Même si tu n’existais plus dans ce monde… je continuerais à t’aimer.  »", auteur : "   Ban  ", image: "https://i.pinimg.com/736x/f4/47/3e/f4473e76611c2e2eca624f9036e22ae8.jpg" },
+	  { anime: 'The Seven Deadly Sins', texte: "«  Un cœur… est quelque chose de si douloureux. »", auteur : "   Gowther  ", image: "https://i.pinimg.com/736x/8b/68/67/8b68672acd93a151f34389f58fa2152e.jpg" },
+	  { anime: 'The Seven Deadly Sins', texte: "« Même si je perdais tous mes souvenirs… même si je renaissais encore et encore… je tomberais amoureux de toi à chaque fois. »", auteur : "   King  ", image: "https://i.pinimg.com/736x/49/33/c7/4933c74d4fd9c7c2f7ec454f0b59b288.jpg" },
+	  { anime: 'The Seven Deadly Sins', texte: "« La vérité est une arme. Et je choisis quand la dégainer. »", auteur : "   Merlin  ", image: "https://i.pinimg.com/736x/1f/2b/b5/1f2bb5c65f168dcd0c5bc3ee6ffa7ed5.jpg" },
+	  { anime: 'The Seven Deadly Sins', texte: "« Même si je dois affronter le monde entier… je la sauverai.  »", auteur : " Zeldris  ", image: "https://i.pinimg.com/736x/8b/6d/45/8b6d45818207e46e0619883aced2b24f.jpg" },
+	  { anime: 'The Seven Deadly Sins', texte: "« Être humain… ce fut un honneur. »", auteur : "  Escanor   ", image: "https://i.pinimg.com/736x/8d/3e/1a/8d3e1a4e89a30c78a74c3dad85dfb148.jpg" },
+	  
+	  { anime: 'Parasyte', texte: "« Ce n’est pas parce que je ressens moins de choses… que je ne suis plus humain. »", auteur : "  Shinichi   ", image: "https://i.pinimg.com/736x/65/53/f5/6553f57c96778370ee62824f82e641b8.jpg" },
+	  { anime: 'Parasyte', texte: "« La logique est plus fiable que l’émotion. C’est elle qui m’a permis de survivre.  »", auteur : "  Migi   ", image: "https://i.pinimg.com/736x/6f/1b/f9/6f1bf988308bab438590e7ea4dfd0192.jpg" },
+	  { anime: 'Parasyte', texte: "« Si je détourne les yeux de la réalité, alors je ne mérite pas de vivre.   »", auteur : "  Shinichi    ", image: "https://i.pinimg.com/736x/45/ab/04/45ab049c6dfb7aead9993970cf6a50f1.jpg" },
+	  { anime: 'Parasyte', texte: "« Il n’existe pas de réponse absolue à la question de ce qui est juste ou non.  »", auteur : "  Reiko Tamura    ", image: "https://i.pinimg.com/736x/e2/9b/c4/e29bc4a6325ec02de236108af1974604.jpg" },
+	  { anime: 'Parasyte', texte: "« Le danger, ce n’est pas ceux qui tuent… c’est ceux qui trouvent ça normal.  »", auteur : "  Migi    ", image: "https://i.pinimg.com/736x/71/29/b4/7129b473727dd7080e9a445aec6941da.jpg" },
+	  { anime: 'Parasyte', texte: "« Peut-être qu’on ne saura jamais ce qu’est vraiment l’humanité. Mais ça ne veut pas dire qu’on doit arrêter de chercher.  »", auteur : "  Shinichi    ", image: "https://i.pinimg.com/736x/bd/72/e3/bd72e392d675e9b2dd074a18a320a656.jpg" },
+	  { anime: 'Parasyte', texte: "« Je sais que c’est stupide… mais je peux pas m’empêcher d’y croire. »", auteur : "  Kana Kimishima    ", image: "https://i.pinimg.com/736x/54/1d/28/541d28975bf883f477c6ae7cfbba29f1.jpg" },
+	  { anime: 'Parasyte', texte: "« La peur est un outil. Ceux qui savent l’utiliser vivent plus longtemps.  »", auteur : "  Gotou   ", image: "https://i.pinimg.com/736x/55/be/29/55be2909187ec856bb1bebb15194a6dc.jpg"},
+	  
+	  { anime: 'Tokyo Ghoul', texte: "«  Je ne suis ni humain… ni goule. Je suis juste moi.   »", auteur : "  Kaneki   ", image: "https://i.pinimg.com/736x/73/a0/5f/73a05f0c3c544f0551899b496f2cd5e6.jpg"},
+	  { anime: 'Tokyo Ghoul', texte: "« Ce n’est pas la faim qui pousse les goules à tuer… c’est le désespoir. »", auteur : "  Yoshimura   ", image: "https://i.pinimg.com/736x/ed/0c/67/ed0c6716ef9ac62be2fdce091d0596ca.jpg"},
+	  { anime: 'Tokyo Ghoul', texte: "« Tu n’as pas le droit de juger ce que tu ne comprends pas.  »", auteur : "  Touka   ", image: "https://i.pinimg.com/736x/8b/f5/e7/8bf5e7dfadc19ed5de064c4775318754.jpg" },
+	  { anime: 'Tokyo Ghoul', texte: "«  Tu ne peux pas fuir ce que tu es.  »", auteur : "   Rize    ", image: "https://i.pinimg.com/736x/3f/46/06/3f4606d26336c9da0dc3a878c00097b3.jpg" },
+	  { anime: 'Tokyo Ghoul', texte: "« Il faut être prêt à souffrir… si on veut protéger ce qui compte. »", auteur : "   Kaneki    ", image: "https://i.pinimg.com/736x/db/85/96/db8596f5cb0b250fa294794cc3ae1c27.jpg" },
+	  { anime: 'Tokyo Ghoul', texte: "« La beauté réside dans ce que l’on ne peut posséder.  »", auteur : "   Tsukiyama    ", image: "https://i.pinimg.com/736x/23/86/1f/23861f6d1283ff03a857b30725eb565f.jpg" },
+	  { anime: 'Tokyo Ghoul', texte: "« Ce n’est pas parce qu’on est du côté de la justice… qu’on est sans péché.   »", auteur : "   Koutarou    ", image: "https://i.pinimg.com/736x/5e/e9/86/5ee98670fbc19b675c54efaa992ee821.jpg" },
+	  { anime: 'Tokyo Ghoul', texte: "« Pourquoi les humains nous détestent… alors qu’on veut juste vivre ?  »", auteur : "   Hinami    ", image: "https://i.pinimg.com/736x/47/72/8d/47728db4b1de3adb3e96b727dfc9e38e.jpg" },
+
+
+];
+
+ function creerCarte(container, c, isLarge = false) {
+    const card = document.createElement('div');
+    card.className = 'card';
+	const badge = document.createElement('div');
+badge.className = 'anime-badge';
+badge.innerText = c.anime;
+card.appendChild(badge);
+
+    if (isLarge) card.style.maxWidth = '600px';
+    card.style.margin = '0 auto';
+
+    const img = new Image();
+    img.src = c.image;
+    img.className = 'image';
+    img.alt = `Image de ${c.auteur} - citation ${c.anime}`;
+    img.style.objectFit = 'cover';
+    img.style.objectPosition = 'center center';
+    img.style.width = '100%';
+    img.style.height = isLarge ? '400px' : '250px';
+    img.style.opacity = '0';
+    img.style.transition = 'opacity 0.6s ease';
+    img.onload = () => img.style.opacity = '1';
+
+    const citationDiv = document.createElement('div');
+    citationDiv.className = 'citation';
+    citationDiv.innerHTML = `
+      <p class="texte">${c.texte}</p>
+      <p class="auteur">— ${c.auteur}</p>
+      <p class="copier-btn" onclick="copier('${c.texte}')">Copier</p>
+    `;
+
+    card.appendChild(img);
+    card.appendChild(citationDiv);
+    container.appendChild(card);
+  }
+
+  function afficherCitations(filtre) {
+    const container = document.getElementById('citations');
+    container.innerHTML = '';
+    const list = filtre === 'tous' ? citations : citations.filter(c => c.anime === filtre);
+    list.forEach(c => creerCarte(container, c));
+  }
+
+  function afficherCitationAleatoire() {
+    const container = document.getElementById('citations');
+    container.innerHTML = '';
+    const randomCitation = citations[Math.floor(Math.random() * citations.length)];
+    const img = new Image();
+    img.src = randomCitation.image;
+    img.onload = () => {
+      creerCarte(container, randomCitation, true);
+    };
+  }
+
+  function copier(text) {
+    navigator.clipboard.writeText(text);
+    alert("Citation copiée !");
+  }
+
+  function filtrer(button, anime) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    afficherCitations(anime);
+  }
+
+function toggleTheme(button) {
+  const body = document.body;
+  const isLight = body.classList.toggle('light');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  button.innerText = isLight ? '🌙' : '☀️';
+  button.classList.add('rotate');
+  setTimeout(() => button.classList.remove('rotate'), 600);
+}
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  window.onscroll = () => {
+    document.getElementById('scrollTop').style.display = window.scrollY > 200 ? 'block' : 'none';
+  };
+function rechercherCitation() {
+  const input = document.getElementById('searchInput').value.toLowerCase();
+  const container = document.getElementById('citations');
+  container.innerHTML = '';
+  const resultats = citations.filter(c =>
+    c.texte.toLowerCase().includes(input) ||
+    c.auteur.toLowerCase().includes(input)
+  );
+  resultats.forEach(c => creerCarte(container, c));
+}
+
+
+window.onload = () => {
+  const theme = localStorage.getItem('theme');
+  const body = document.body;
+  const toggleBtn = document.querySelector('.theme-toggle');
+  if (theme === 'light') {
+    body.classList.add('light');
+    toggleBtn.innerText = '🌙';
+  }
+  afficherCitations('tous');
+};
+</script>
+
 
