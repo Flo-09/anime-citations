@@ -98,6 +98,42 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
+#scrollTop {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: none;
+  background: var(--btn);
+  border: none;
+  color: var(--text);
+  padding: 0.7rem 0.9rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s, opacity 0.3s ease;
+  animation: floatUp 2s infinite ease-in-out;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  font-size: 1.2rem;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#scrollTop:hover {
+  background: var(--btn-hover);
+  transform: scale(1.1);
+}
 
   .random-btn:hover {
     background-color: var(--btn-hover);
