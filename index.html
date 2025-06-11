@@ -173,10 +173,9 @@
     margin: 1rem auto;
     display: flex;
     flex-direction: column;
-    height: 520px; /* fixe pour l'uniformité */
-    padding: 0,5rem; /* espace intérieur */
-    box-sizing: border-box;
-    gap: 0,85rem;
+    height: 520px; /* fixe pour l'uniformité */ min-height: 520px; /* pour garder une cohérence dans la grille */
+  height: auto; 
+     box-sizing: border-box;
 }
 
 .card img {
@@ -509,8 +508,10 @@ badge.className = 'anime-badge';
 badge.innerText = c.anime;
 card.appendChild(badge);
 
-    if (isLarge) card.style.maxWidth = '600px';
-    card.style.margin = '0 auto';
+   if (isLarge) {
+  card.style.maxWidth = '600px';
+  card.style.height = 'auto'; // ✅ pour que la hauteur s’adapte
+}
 
     const img = new Image();
     img.src = c.image;
@@ -612,4 +613,3 @@ window.onload = () => {
   afficherCitations('tous');
 };
 </script>
-
