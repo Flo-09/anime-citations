@@ -6,360 +6,465 @@
   <title>Citations — its.flo</title>
 
   <style>
-    :root {
-      --bg: #000;
-      --text: #fff;
-      --subtext: #aaa;
-      --card: #111;
-      --border: #333;
-      --btn: #222;
-      --btn-hover: #444;
-      --copier: #aaa;
-      --copier-hover: #fff;
+    :root{
+      --bg:#000;
+      --text:#fff;
+      --subtext:#aaa;
+      --card:#111;
+      --border:#333;
+      --btn:#222;
+      --btn-hover:#444;
+      --copier:#aaa;
+      --copier-hover:#fff;
 
-      --radius: 18px;
-      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius:18px;
+      --shadow: 0 12px 34px rgba(0,0,0,.35);
       --maxw: 1200px;
+      --glass: rgba(255,255,255,.06);
+    }
+    body.light{
+      --bg:#fff;
+      --text:#000;
+      --subtext:#555;
+      --card:#f1f1f1;
+      --border:#d0d0d0;
+      --btn:#e6e6e6;
+      --btn-hover:#d2d2d2;
+      --copier:#333;
+      --copier-hover:#000;
+      --glass: rgba(0,0,0,.05);
     }
 
-    body.light {
-      --bg: #fff;
-      --text: #000;
-      --subtext: #555;
-      --card: #f1f1f1;
-      --border: #ccc;
-      --btn: #ddd;
-      --btn-hover: #bbb;
-      --copier: #333;
-      --copier-hover: #000;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background-color: var(--bg);
-      color: var(--text);
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding: clamp(14px, 2.2vw, 32px);
-      transition: background 0.3s ease, color 0.3s ease;
+      transition: background .25s ease, color .25s ease;
       background-image: radial-gradient(circle at top left, rgba(255,255,255,0.08) 1px, transparent 1px);
       background-size: 30px 30px;
-      min-height: 100vh;
     }
 
-    h1 {
-      text-align: center;
-      font-size: clamp(1.35rem, 2.7vw, 2.5rem);
-      margin: 0.5rem auto 0.4rem;
-      max-width: var(--maxw);
-      line-height: 1.15;
-      transition: color 0.35s ease;
-      padding: 0 6px;
-      cursor: default;
-    }
-    h1:hover { color: var(--copier-hover); }
-
-    p.subtitle {
-      text-align: center;
-      color: var(--subtext);
-      margin: 0 auto 1.5rem;
-      max-width: var(--maxw);
-      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
-      padding: 0 6px;
-      cursor: default;
-    }
-
-    .theme-toggle {
-      position: fixed;
-      top: 14px;
-      right: 14px;
-      z-index: 50;
-      background: var(--btn);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.55rem 0.85rem;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s ease;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(6px);
-      -webkit-tap-highlight-color: transparent;
-    }
-    .theme-toggle:hover { background: var(--btn-hover); }
-    .theme-toggle:active { transform: scale(0.96); }
-
-    .filters {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin: 0 auto 1.2rem;
-      max-width: var(--maxw);
-      padding: 0 6px;
-    }
-
-    .filter-btn {
-      background-color: var(--btn);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.55rem 1.05rem;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: background-color 0.25s ease, transform 0.15s ease;
-      font-size: 0.95rem;
-      white-space: nowrap;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .filter-btn:hover,
-    .filter-btn.active {
-      background-color: var(--btn-hover);
-      font-weight: 700;
-    }
-    .filter-btn:active { transform: scale(0.98); }
-
-    .search-bar {
-      display: flex;
-      justify-content: center;
-      margin: 0 auto 1.2rem;
-      max-width: var(--maxw);
-      padding: 0 6px;
-    }
-
-    .search-input {
-      padding: 0.65rem 1rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background-color: var(--card);
-      color: var(--text);
-      width: min(720px, 100%);
-      font-size: 1rem;
-      transition: border 0.25s, background 0.25s, transform 0.2s;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-    }
-    .search-input:focus {
-      outline: none;
-      border-color: var(--btn-hover);
-      background-color: var(--btn);
-      transform: translateY(-1px);
-    }
-
-    .random-btn {
-      display: block;
-      margin: 0 auto 1.5rem;
-      background-color: var(--btn);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.65rem 1.25rem;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: background-color 0.25s ease, transform 0.15s ease;
-      box-shadow: var(--shadow);
-      -webkit-tap-highlight-color: transparent;
-    }
-    .random-btn:hover { background-color: var(--btn-hover); }
-    .random-btn:active { transform: scale(0.98); }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
+    /* ===== Layout container ===== */
+    .wrap{
       max-width: var(--maxw);
       margin: 0 auto;
-      padding: 0 6px 20px;
-    }
-    @media (min-width: 640px) {
-      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
-    }
-    @media (min-width: 1024px) {
-      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; }
+      padding: clamp(14px, 2.2vw, 28px);
+      padding-top: 18px;
     }
 
-    .card {
-      background-color: var(--card);
+    /* ===== Sticky header (pratique) ===== */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      margin: 0 -14px;
+      padding: 10px 14px 12px;
+      background: linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.55), rgba(0,0,0,0));
+      backdrop-filter: blur(10px);
+    }
+    body.light .topbar{
+      background: linear-gradient(to bottom, rgba(255,255,255,.92), rgba(255,255,255,.70), rgba(255,255,255,0));
+    }
+
+    .toprow{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content: space-between;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width: 0;
+    }
+    h1{
+      margin:0;
+      font-size: clamp(1.1rem, 2.2vw, 1.65rem);
+      line-height:1.15;
+      cursor: default;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .subtitle{
+      margin:0;
+      color:var(--subtext);
+      font-size: .92rem;
+      cursor: default;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-shrink: 0;
+    }
+
+    .iconbtn{
+      border: 1px solid var(--border);
+      background: var(--btn);
+      color: var(--text);
+      border-radius: 999px;
+      cursor:pointer;
+      padding: .55rem .8rem;
+      box-shadow: var(--shadow);
+      transition: background .2s ease, transform .12s ease;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
+    }
+    .iconbtn:hover{ background: var(--btn-hover); }
+    .iconbtn:active{ transform: scale(.98); }
+
+    /* Search + random = fluid */
+    .controls{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:10px;
+      margin-top: 10px;
+    }
+    @media (max-width: 520px){
+      .controls{ grid-template-columns: 1fr; }
+      .actions .iconbtn{ padding: .52rem .7rem; }
+    }
+
+    .search{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .search-input{
+      width:100%;
+      padding: .70rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+      transition: border .2s ease, background .2s ease;
+      box-shadow: 0 10px 26px rgba(0,0,0,.18);
+    }
+    .search-input:focus{
+      border-color: var(--btn-hover);
+      background: var(--btn);
+    }
+
+    .random-btn{
+      border: 1px solid var(--border);
+      background: var(--btn);
+      color: var(--text);
+      border-radius: 999px;
+      cursor:pointer;
+      padding: .70rem 1rem;
+      box-shadow: var(--shadow);
+      transition: background .2s ease, transform .12s ease;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
+    }
+    .random-btn:hover{ background: var(--btn-hover); }
+    .random-btn:active{ transform: scale(.98); }
+
+    /* ===== Filters: horizontal, scrollable (mobile friendly) ===== */
+    .filters{
+      display:flex;
+      gap:10px;
+      padding: 12px 0 6px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .filters::-webkit-scrollbar{ display:none; }
+
+    .filter-btn{
+      flex: 0 0 auto;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      color: var(--text);
+      border-radius: 999px;
+      cursor:pointer;
+      padding: .55rem .95rem;
+      transition: background .2s ease, transform .12s ease;
+      -webkit-tap-highlight-color: transparent;
+      font-size: .95rem;
+      white-space: nowrap;
+    }
+    .filter-btn:hover{ background: var(--btn); }
+    .filter-btn.active{
+      background: var(--btn-hover);
+      font-weight: 700;
+    }
+    .filter-btn:active{ transform: scale(.98); }
+
+    /* ===== Result info ===== */
+    .meta{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap:12px;
+      margin: 10px 0 14px;
+      color: var(--subtext);
+      font-size: .95rem;
+    }
+    .meta strong{ color: var(--text); }
+    .clear-btn{
+      border:none;
+      background: transparent;
+      color: var(--subtext);
+      cursor:pointer;
+      text-decoration: underline;
+      padding: 6px 0;
+    }
+    .clear-btn:hover{ color: var(--text); }
+
+    /* ===== Grid: plus fluide PC/tel ===== */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 14px;
+      padding-bottom: 22px;
+    }
+    @media (min-width: 640px){
+      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    }
+    @media (min-width: 980px){
+      .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    }
+    @media (min-width: 1240px){
+      .grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    /* ===== Card: plus compacte & pratique ===== */
+    .card{
+      background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
       position: relative;
-      display: flex;
+      display:flex;
       flex-direction: column;
-      transform: translateZ(0);
-      transition: transform 0.25s ease, filter 0.25s ease;
-      animation: fadeIn 0.35s ease;
+      transition: transform .22s ease, filter .22s ease;
+      animation: fadeIn .25s ease;
+      min-height: 100%;
     }
-    .card:hover {
-      transform: scale(1.02);
+    .card:hover{
+      transform: translateY(-2px);
       filter: brightness(1.06);
     }
 
-    .anime-badge {
-      position: absolute;
+    .anime-badge{
+      position:absolute;
       top: 10px;
       left: 10px;
-      background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 0.28rem 0.55rem;
-      font-size: 0.75rem;
+      background: rgba(0,0,0,.38);
+      border: 1px solid rgba(255,255,255,.14);
       color: var(--text);
+      padding: .28rem .55rem;
       border-radius: 10px;
-      backdrop-filter: blur(8px);
-      opacity: 0.95;
-      transition: transform 0.25s ease, background 0.25s ease;
-      pointer-events: none;
-      cursor: default;
+      font-size: .75rem;
+      backdrop-filter: blur(10px);
+      pointer-events:none;
+      opacity: .95;
     }
-    body.light .anime-badge {
-      background: rgba(255,255,255,0.55);
-      border: 1px solid rgba(0,0,0,0.10);
-    }
-    .card:hover .anime-badge {
-      transform: scale(1.05);
-      background: rgba(0,0,0,0.55);
-    }
-    body.light .card:hover .anime-badge {
-      background: rgba(255,255,255,0.75);
+    body.light .anime-badge{
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(0,0,0,.10);
     }
 
-    .image {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      height: auto;
+    .image{
+      width:100%;
+      aspect-ratio: 16/10;
       object-fit: cover;
       object-position: center;
-      display: block;
+      display:block;
       opacity: 0;
-      transition: opacity 0.6s ease;
+      transition: opacity .6s ease;
     }
 
-    .citation {
-      padding: 1rem 1rem 1.05rem;
-      display: flex;
+    .citation{
+      padding: 12px 12px 12px;
+      display:flex;
       flex-direction: column;
-      gap: 0.55rem;
+      gap: 10px;
+      flex: 1;
     }
 
-    .texte {
+    .texte{
+      margin:0;
       font-style: italic;
-      font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+      font-size: clamp(1.02rem, 1.4vw, 1.15rem);
       line-height: 1.35;
-      margin: 0;
       cursor: default;
     }
 
-    .auteur {
-      margin: 0;
-      text-align: right;
+    .bottomrow{
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .auteur{
+      margin:0;
       color: var(--subtext);
-      font-size: 0.98rem;
+      font-size: .98rem;
       cursor: default;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    .copier-btn {
-      margin: 0;
-      text-align: right;
-      font-size: 0.9rem;
-      color: var(--copier);
-      cursor: pointer;
-      text-decoration: underline;
-      user-select: none;
-      width: fit-content;
-      margin-left: auto;
+    .copy-btn{
+      border: 1px solid var(--border);
+      background: var(--btn);
+      color: var(--text);
+      border-radius: 999px;
+      cursor:pointer;
+      padding: .45rem .75rem;
+      font-size: .90rem;
+      transition: background .2s ease, transform .12s ease;
       -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
     }
-    .copier-btn:hover { color: var(--copier-hover); }
+    .copy-btn:hover{ background: var(--btn-hover); }
+    .copy-btn:active{ transform: scale(.98); }
 
-    #scrollTop {
+    /* ===== Scroll top ===== */
+    #scrollTop{
       position: fixed;
       bottom: 18px;
       right: 18px;
-      display: none;
+      display:none;
       background: var(--btn);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 0.7rem 0.9rem;
+      padding: .72rem .92rem;
       border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.25s, transform 0.15s ease, opacity 0.25s ease;
-      animation: floatUp 2s infinite ease-in-out;
+      cursor:pointer;
       box-shadow: var(--shadow);
-      font-size: 1.1rem;
-      z-index: 40;
+      transition: background .2s ease, transform .12s ease, opacity .2s ease;
+      z-index: 80;
       -webkit-tap-highlight-color: transparent;
     }
-    #scrollTop:hover {
-      background: var(--btn-hover);
-      transform: scale(1.06);
-    }
+    #scrollTop:hover{ background: var(--btn-hover); transform: scale(1.05); }
 
-    @keyframes floatUp {
-      0% { transform: translateY(0); opacity: 1; }
-      50% { transform: translateY(-10px); opacity: 0.85; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    footer {
-      text-align: center;
-      margin: 2.5rem auto 0.5rem;
-      font-size: 0.92rem;
+    footer{
+      text-align:center;
       color: var(--subtext);
-      max-width: var(--maxw);
+      font-size: .92rem;
+      padding: 18px 0 26px;
       cursor: default;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
+    /* toast (copie) */
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.75);
+      color: #fff;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .25s ease, transform .25s ease;
+      z-index: 200;
+      font-size: .95rem;
+    }
+    body.light .toast{
+      background: rgba(0,0,0,.80);
+      color: #fff;
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-6px);
+    }
+
+    @keyframes fadeIn{
+      from{ opacity:0; transform: translateY(6px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ animation:none !important; transition:none !important; }
     }
   </style>
 </head>
 
 <body>
-  <button class="theme-toggle" onclick="toggleTheme(this)" aria-label="Changer le thème">☀️</button>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="toprow">
+        <div class="brand">
+          <h1>« Comprendre le monde, c’est d’abord se comprendre soi. »</h1>
+          <p class="subtitle">Un espace d’introspection animé — Its.flo</p>
+        </div>
 
-  <h1>« Comprendre le monde, c’est d’abord se comprendre soi. »</h1>
-  <p class="subtitle">Un espace d’introspection animé — Its.flo</p>
+        <div class="actions">
+          <button class="iconbtn" onclick="toggleTheme(this)" aria-label="Changer le thème">☀️</button>
+        </div>
+      </div>
 
-  <div class="filters">
-    <button class="filter-btn active" onclick="filtrer(this, 'tous')">Tous</button>
-    <button class="filter-btn" onclick="filtrer(this, 'Classroom of the Elite')">Classroom of the Elite</button>
-    <button class="filter-btn" onclick="filtrer(this, 'Naruto')">Naruto</button>
-    <button class="filter-btn" onclick="filtrer(this, 'SNK')">Shingeki no Kyojin</button>
-    <button class="filter-btn" onclick="filtrer(this, 'JJK')">Jujutsu Kaisen</button>
-    <button class="filter-btn" onclick="filtrer(this, 'ReZero')">Re:Zero</button>
-    <button class="filter-btn" onclick="filtrer(this, 'One Piece')">One Piece</button>
-    <button class="filter-btn" onclick="filtrer(this, 'MHA')">My Hero Academia</button>
-    <button class="filter-btn" onclick="filtrer(this, 'Assassination Classroom')">Assassination Classroom</button>
-    <button class="filter-btn" onclick="filtrer(this, 'The Seven Deadly Sins')">The Seven Deadly Sins</button>
-    <button class="filter-btn" onclick="filtrer(this, 'Parasyte')">Parasyte</button>
-    <button class="filter-btn" onclick="filtrer(this, 'Tokyo Ghoul')">Tokyo Ghoul</button>
-    <button class="filter-btn" onclick="filtrer(this, 'Death Note')">Death Note</button>
+      <div class="controls">
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="🔍 Rechercher une citation, un perso, ou un anime..."
+          oninput="rechercherCitation()"
+          aria-label="Rechercher"
+        />
+        <button class="random-btn" onclick="afficherCitationAleatoire()">🎲 Aléatoire</button>
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="filter-btn active" onclick="filtrer(this, 'tous')">Tous</button>
+        <button class="filter-btn" onclick="filtrer(this, 'Classroom of the Elite')">Classroom of the Elite</button>
+        <button class="filter-btn" onclick="filtrer(this, 'Naruto')">Naruto</button>
+        <button class="filter-btn" onclick="filtrer(this, 'SNK')">Shingeki no Kyojin</button>
+        <button class="filter-btn" onclick="filtrer(this, 'JJK')">Jujutsu Kaisen</button>
+        <button class="filter-btn" onclick="filtrer(this, 'ReZero')">Re:Zero</button>
+        <button class="filter-btn" onclick="filtrer(this, 'One Piece')">One Piece</button>
+        <button class="filter-btn" onclick="filtrer(this, 'MHA')">My Hero Academia</button>
+        <button class="filter-btn" onclick="filtrer(this, 'Assassination Classroom')">Assassination Classroom</button>
+        <button class="filter-btn" onclick="filtrer(this, 'The Seven Deadly Sins')">The Seven Deadly Sins</button>
+        <button class="filter-btn" onclick="filtrer(this, 'Parasyte')">Parasyte</button>
+        <button class="filter-btn" onclick="filtrer(this, 'Tokyo Ghoul')">Tokyo Ghoul</button>
+        <button class="filter-btn" onclick="filtrer(this, 'Death Note')">Death Note</button>
+      </div>
+    </div>
   </div>
 
-  <div class="search-bar">
-    <input
-      type="text"
-      class="search-input"
-      id="searchInput"
-      placeholder="🔍 Rechercher une citation, un personnage, ou un anime..."
-      oninput="rechercherCitation()"
-      aria-label="Rechercher"
-    />
+  <div class="wrap">
+    <div class="meta">
+      <div id="metaText">Affichage : <strong id="countText">0</strong> citations</div>
+      <button class="clear-btn" onclick="resetAll()">Réinitialiser</button>
+    </div>
+
+    <main class="grid" id="citations"></main>
+
+    <button id="scrollTop" onclick="scrollToTop()" aria-label="Retour en haut">⬆️</button>
+
+    <footer>© Its.flo. Tous droits réservés.</footer>
   </div>
 
-  <button class="random-btn" onclick="afficherCitationAleatoire()">🎲 Citation aléatoire</button>
-
-  <main class="grid" id="citations"></main>
-
-  <button id="scrollTop" onclick="scrollToTop()" aria-label="Retour en haut">⬆️</button>
-
-  <footer>© Its.flo. Tous droits réservés.</footer>
+  <div class="toast" id="toast">Copié ✅</div>
 
   <script>
-    // ✅ Liste complète (celle que tu as donnée)
     const citations = [
       { anime: 'Classroom of the Elite', texte: "«  Les émotions sont inutiles. Ce sont des parasites qui troublent la logique.  »", auteur: "Ayanokoji", image: "https://i.pinimg.com/736x/d8/ec/97/d8ec978537d140e5e6167c900be9b459.jpg" },
       { anime: 'Classroom of the Elite', texte: "« Ceux qui parlent d’égalité sont généralement les perdants. »", auteur: "Ayanokoji", image: "https://i.pinimg.com/736x/60/01/8c/60018ce13a38e6715f7ae873837bb05b.jpg" },
@@ -470,19 +575,31 @@
       { anime: 'Death Note', texte: "« Kira est juste un meurtrier avec un complexe de Dieu. »", auteur : "   Near    ", image: "https://i.pinimg.com/736x/0a/bb/1b/0abb1b7a6eb4fb9869c7c68efac4d872.jpg" },
     ];
 
-    function creerCarte(container, c, isLarge = false) {
+    let activeAnime = 'tous';
+
+    function setMeta(n){
+      document.getElementById('countText').textContent = n;
+    }
+
+    function toast(msg="Copié ✅"){
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => el.classList.remove('show'), 1100);
+    }
+
+    function creerCarte(container, c, isLarge = false){
       const card = document.createElement('div');
       card.className = 'card';
 
-      if (isLarge) {
-        card.style.maxWidth = '760px';
-        card.style.margin = '0 auto';
+      if (isLarge){
+        card.style.gridColumn = '1 / -1';
       }
 
       const badge = document.createElement('div');
       badge.className = 'anime-badge';
       badge.innerText = c.anime;
-      card.appendChild(badge);
 
       const img = new Image();
       img.src = c.image;
@@ -490,101 +607,147 @@
       img.alt = `Image de ${c.auteur} - citation ${c.anime}`;
       img.loading = "lazy";
       img.decoding = "async";
-      img.onload = () => { img.style.opacity = '1'; };
+      img.onload = () => img.style.opacity = '1';
 
       const citationDiv = document.createElement('div');
       citationDiv.className = 'citation';
-      citationDiv.innerHTML = `
-        <p class="texte">${c.texte}</p>
-        <p class="auteur">— ${c.auteur}</p>
-        <p class="copier-btn" onclick="copier(${JSON.stringify(c.texte)})">Copier</p>
-      `;
 
+      const pTexte = document.createElement('p');
+      pTexte.className = 'texte';
+      pTexte.textContent = c.texte;
+
+      const bottom = document.createElement('div');
+      bottom.className = 'bottomrow';
+
+      const pAuteur = document.createElement('p');
+      pAuteur.className = 'auteur';
+      pAuteur.textContent = "— " + c.auteur;
+
+      const copy = document.createElement('button');
+      copy.className = 'copy-btn';
+      copy.type = 'button';
+      copy.textContent = 'Copier';
+      copy.addEventListener('click', () => copier(c.texte));
+
+      bottom.appendChild(pAuteur);
+      bottom.appendChild(copy);
+
+      citationDiv.appendChild(pTexte);
+      citationDiv.appendChild(bottom);
+
+      card.appendChild(badge);
       card.appendChild(img);
       card.appendChild(citationDiv);
       container.appendChild(card);
     }
 
-    function afficherCitations(filtre) {
-      const container = document.getElementById('citations');
-      container.innerHTML = '';
-      const list = filtre === 'tous' ? citations : citations.filter(c => c.anime === filtre);
-      list.forEach(c => creerCarte(container, c));
+    function getFilteredList(){
+      const input = document.getElementById('searchInput').value.toLowerCase().trim();
+
+      let list = (activeAnime === 'tous')
+        ? citations
+        : citations.filter(c => c.anime === activeAnime);
+
+      if (input){
+        list = list.filter(c =>
+          c.texte.toLowerCase().includes(input) ||
+          c.auteur.toLowerCase().includes(input) ||
+          c.anime.toLowerCase().includes(input)
+        );
+      }
+      return list;
     }
 
-    function afficherCitationAleatoire() {
+    function render(){
       const container = document.getElementById('citations');
       container.innerHTML = '';
-      const randomCitation = citations[Math.floor(Math.random() * citations.length)];
-      creerCarte(container, randomCitation, true);
+      const list = getFilteredList();
+      list.forEach(c => creerCarte(container, c));
+      setMeta(list.length);
+    }
+
+    function afficherCitationAleatoire(){
+      const container = document.getElementById('citations');
+      container.innerHTML = '';
+      const list = getFilteredList();
+      const pick = list.length ? list[Math.floor(Math.random() * list.length)] : null;
+      if (!pick){
+        setMeta(0);
+        toast("Aucun résultat");
+        return;
+      }
+      creerCarte(container, pick, true);
+      setMeta(1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    async function copier(text) {
-      try {
+    async function copier(text){
+      try{
         await navigator.clipboard.writeText(text);
-        alert("Citation copiée !");
-      } catch (e) {
-        // fallback
+        toast("Copié ✅");
+      }catch(e){
         const textarea = document.createElement('textarea');
         textarea.value = text;
         document.body.appendChild(textarea);
         textarea.select();
         document.execCommand('copy');
         textarea.remove();
-        alert("Citation copiée !");
+        toast("Copié ✅");
       }
     }
 
-    function filtrer(button, anime) {
+    function filtrer(button, anime){
+      activeAnime = anime;
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
-      document.getElementById('searchInput').value = '';
-      afficherCitations(anime);
+      render();
     }
 
-    function toggleTheme(button) {
+    function rechercherCitation(){
+      render();
+    }
+
+    function resetAll(){
+      activeAnime = 'tous';
+      document.getElementById('searchInput').value = '';
+
+      // remettre "Tous" actif
+      const btnTous = document.querySelector('.filters .filter-btn');
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      btnTous.classList.add('active');
+
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleTheme(button){
       const body = document.body;
       const isLight = body.classList.toggle('light');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      button.innerText = isLight ? '🌙' : '☀️';
+      button.textContent = isLight ? '🌙' : '☀️';
     }
 
-    function scrollToTop() {
+    function scrollToTop(){
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     window.addEventListener('scroll', () => {
-      document.getElementById('scrollTop').style.display = window.scrollY > 200 ? 'block' : 'none';
+      const el = document.getElementById('scrollTop');
+      el.style.display = window.scrollY > 240 ? 'block' : 'none';
     });
-
-    function rechercherCitation() {
-      const input = document.getElementById('searchInput').value.toLowerCase().trim();
-      const container = document.getElementById('citations');
-      container.innerHTML = '';
-
-      const resultats = citations.filter(c =>
-        c.texte.toLowerCase().includes(input) ||
-        c.auteur.toLowerCase().includes(input) ||
-        c.anime.toLowerCase().includes(input)
-      );
-
-      resultats.forEach(c => creerCarte(container, c));
-    }
 
     window.addEventListener('load', () => {
       const theme = localStorage.getItem('theme');
-      const body = document.body;
-      const toggleBtn = document.querySelector('.theme-toggle');
+      const btn = document.querySelector('.iconbtn');
 
-      if (theme === 'light') {
-        body.classList.add('light');
-        toggleBtn.innerText = '🌙';
+      if (theme === 'light'){
+        document.body.classList.add('light');
+        btn.textContent = '🌙';
       } else {
-        toggleBtn.innerText = '☀️';
+        btn.textContent = '☀️';
       }
 
-      afficherCitations('tous');
+      render();
     });
   </script>
 </body>
